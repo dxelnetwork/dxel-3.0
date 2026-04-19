@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Payment gateway information for DXEL Network — PayPal, wire transfer, bKash, and bank transfer options.">
+    <meta name="author" content="DXEL Network">
+    <meta property="og:site_name" content="DXEL Network" />
+    <meta property="og:title" content="Payment — DXEL Network" />
+    <meta property="og:description"
+        content="View our payment gateway options including PayPal, wire transfer, bKash, and bank transfer." />
+    <meta property="og:image" content="images/logo.png" />
+    <meta property="og:url" content="https://dxel.net/payment.html" />
+    <meta property="og:type" content="article" />
+    <title>Payment — DXEL Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel="icon" href="images/logo/favicon.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-803NB2EC0Q"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-803NB2EC0Q');</script>
+    <style>
+        .legal-content {
+            padding: var(--space-3xl) 0
+        }
+
+        .legal-content p {
+            color: var(--dxel-muted);
+            line-height: 1.8;
+            margin-bottom: var(--space-md)
+        }
+
+        .legal-content .last-updated {
+            color: var(--dxel-muted);
+            font-size: .9rem;
+            opacity: .7
+        }
+
+        .legal-content .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .75rem 2rem;
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-full);
+            color: var(--dxel-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all .3s ease;
+            margin-top: var(--space-xl)
+        }
+
+        .legal-content .btn-back:hover {
+            background: var(--dxel-accent);
+            border-color: var(--dxel-accent);
+            color: var(--dxel-bg)
+        }
+
+        .payment-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl)
+        }
+
+        .payment-card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            backdrop-filter: blur(20px)
+        }
+
+        .payment-card h3 {
+            font-size: 1.3rem;
+            color: var(--dxel-white);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--glass-border)
+        }
+
+        .payment-card h4 {
+            font-size: 1.1rem;
+            color: var(--dxel-accent);
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-md)
+        }
+
+        .payment-card img {
+            max-width: 200px;
+            margin-bottom: var(--space-md);
+            border-radius: var(--radius-sm)
+        }
+
+        .payment-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        .payment-card ul li {
+            color: var(--dxel-muted);
+            line-height: 2;
+            font-size: .95rem
+        }
+
+        .payment-card ul li strong {
+            color: var(--dxel-white)
+        }
+
+        .payment-card a {
+            color: var(--dxel-accent);
+            text-decoration: none
+        }
+
+        .payment-card a:hover {
+            text-decoration: underline
+        }
+
+        .payment-card p {
+            color: var(--dxel-muted)
+        }
+
+        .payment-card p strong {
+            color: var(--dxel-white)
+        }
+
+        .payment-section-title {
+            font-size: 1.75rem;
+            color: var(--dxel-white);
+            text-align: center;
+            margin-bottom: var(--space-xl)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="preloader-spinner"><span></span><span></span><span></span></div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-logo"><img src="images/logo/dxelnetwork.png" alt="DXEL Network"></a>
+            <div class="navbar-links">
+                <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a
+                    href="projects.html">Projects</a><a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-cta"><a href="contact.html" class="btn btn-primary btn-sm">Get Started</a></div>
+            <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <!-- Mobile Nav -->
+    <div class="mobile-nav">
+        <button class="mobile-nav-close" aria-label="Close menu"><i class="fas fa-times"></i></button>
+        <div class="mobile-nav-inner">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="mobile-nav-footer">
+            <a href="contact.html" class="btn btn-primary">Get Started</a>
+            <div class="mobile-nav-socials">
+                <a href="https://twitter.com/DxelNetwork" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/dxelnetwork" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/dxelnetwork" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Payment <span class="gradient-text">Gateway</span></h1>
+            <div class="breadcrumb"><a href="index.html">Home</a><span class="separator">/</span><span>Payment</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="legal-content">
+        <div class="container">
+            <p class="last-updated">Last updated January 03, 2025</p>
+            <h2 class="payment-section-title">Payment Gateway Information</h2>
+            <div class="payment-grid">
+                <div class="payment-card">
+                    <h3><i class="fas fa-globe" style="margin-right:.5rem;color:var(--dxel-accent)"></i>International
+                        Payment Gateway</h3>
+                    <img src="https://psspeech.com/wp-content/uploads/2018/03/paypal-logo-small-min-1.png" alt="PayPal">
+                    <p><strong>PayPal:</strong> dxel@outlook.com</p>
+                    <h4>Wire Transfer</h4>
+                    <img src="https://secure.firstcenturybank.com/images/fi-assets/first-century-bank/first-century-bank-menu-logo-467717ca.png"
+                        alt="First Century Bank">
+                    <ul>
+                        <li><strong>Bank Name:</strong> First Century Bank</li>
+                        <li><strong>Routing (ABA):</strong> 061120084</li>
+                        <li><strong>Beneficiary Name:</strong> DXEL NETWORK</li>
+                        <li><strong>Account Number:</strong> 4012801231343</li>
+                        <li><strong>Account Type:</strong> CHECKING</li>
+                        <li><strong>Bank Address:</strong> 1731 N Elm St, Commerce, GA 30529 USA</li>
+                    </ul>
+                </div>
+                <div class="payment-card">
+                    <h3><i class="fas fa-flag" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Bangladesh
+                        Payment Gateway</h3>
+                    <p><strong>bKash Payment Link:</strong></p>
+                    <a href="#"
+                        onclick="window.open('https://shop.bkash.com/dxel-shop01671774548/paymentlink/default-payment','bkashPopup','width=600,height=700,scrollbars=yes,resizable=yes');return false;">
+                        <img src="https://raw.githubusercontent.com/Shipu/bkash-example/master/bkash_payment_logo.png"
+                            alt="bKash">
+                    </a>
+                    <h4>Bank Transfer</h4>
+                    <img src="https://selfservicehub.ebl-bd.com/pic/header_left.png" alt="EBL">
+                    <ul>
+                        <li><strong>Bank Name:</strong> Eastern Bank Plc</li>
+                        <li><strong>Account Name:</strong> DXEL NETWORK</li>
+                        <li><strong>Account Number:</strong> 1951070006108</li>
+                        <li><strong>Branch:</strong> Jessore</li>
+                        <li><strong>Routing Number:</strong> 095410942</li>
+                    </ul>
+                </div>
+            </div>
+            <a class="btn-back" href="index.html"><i class="fas fa-arrow-left"></i> BACK</a>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content reveal">
+                <h2>Need Help With<br><span class="gradient-text">Payment?</span></h2>
+                <p>Contact us if you have any questions about payment options.</p>
+                <a href="contact.html" class="btn btn-primary btn-lg">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html"><img src="images/logo/dxelnetwork.png" alt="DXEL Network"
+                            style="height:36px;"></a>
+                    <p>We are a digital agency that helps businesses grow through web development, mobile apps, SEO, and
+                        digital marketing.</p>
+                    <img src="images/logo/Microsoft.png" alt="Microsoft AI Cloud Partner" class="partner-badge"
+                        loading="lazy">
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <div class="footer-links"><a href="about.html">About Us</a><a href="services.html">Services</a><a
+                            href="projects.html">Projects</a><a href="contact.html">Contact</a><a
+                            href="https://blog.dxel.net" target="_blank">Blog</a></div>
+                </div>
+                <div>
+                    <h4>Technologies</h4>
+                    <div class="footer-links"><a href="https://reactjs.org/" target="_blank">React</a><a
+                            href="https://nodejs.org/" target="_blank">Node.js</a><a href="https://www.mongodb.com/"
+                            target="_blank">MongoDB</a><a href="https://aws.amazon.com/" target="_blank">AWS</a></div>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <div class="footer-links"><a href="privacy-policy.html">Privacy Policy</a><a
+                            href="terms-conditions.html">Terms & Conditions</a><a href="agreement.html">Agreement</a>
+                    </div>
+                    <h4 style="margin-top:1.5rem;">Follow Us</h4>
+                    <div class="social-links mt-md">
+                        <a href="https://www.twitter.com/DxelNetwork" target="_blank" class="social-link"
+                            aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://pinterest.com/DxelNetwork" target="_blank" class="social-link"
+                            aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.linkedin.com/company/dxelnetwork" target="_blank" class="social-link"
+                            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/dxelnetwork" target="_blank" class="social-link"
+                            aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright &copy; <span id="currentYear"></span> <a href="https://dxel.net">DXEL Network</a> | All
+                    Rights Reserved</p>
+                <div class="footer-bottom-links">
+                    <a href="terms-conditions.html">Terms & Conditions</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="payment.html">Payment</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/company/dxelnetwork" target="_blank" class="social-link"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/dxelnetwork" target="_blank" class="social-link" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="https://wa.me/+13476691213?text=Hi! I'd like to discuss a project" target="_blank" class="whatsapp-float"
+        aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <button class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
