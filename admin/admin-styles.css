@@ -252,3 +252,58 @@ td {
     font-weight: bold;
     text-transform: uppercase;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    /* Navigation */
+    .admin-nav .container {
+        flex-direction: column;
+        gap: var(--space-md);
+        align-items: flex-start;
+    }
+    
+    .admin-nav .flex.gap-xl {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+    
+    .admin-nav .flex.items-center.gap-lg {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: var(--space-sm);
+    }
+
+    /* Stats Grid */
+    .stats-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    /* Table Header */
+    .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
+    }
+    
+    .table-header .flex {
+        width: 100%;
+    }
+    
+    .table-search {
+        flex: 1;
+    }
+    
+    /* Login Card */
+    .login-card {
+        margin: var(--space-md);
+        padding: var(--space-lg);
+    }
+    
+    /* Modal */
+    .modal-content {
+        margin: var(--space-sm);
+        padding: var(--space-lg);
+    }
+}
