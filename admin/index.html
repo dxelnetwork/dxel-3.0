@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXEL Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/dxel-ai.css">
+</head>
+<body class="admin-page">
+    <div class="admin-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- Login Section -->
+    <section id="loginSection" class="admin-login-section">
+        <div class="glass-card login-card">
+            <div class="text-center mb-xl">
+                <img src="../images/logo/dxelnetwork.png" alt="DXEL" class="login-logo">
+                <h2>Admin Login</h2>
+                <p>Access your leads live</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Admin ID</label>
+                    <input type="text" id="adminId" placeholder="Enter ID" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPass" placeholder="Enter Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full mt-lg">Login to Dashboard</button>
+                <p id="loginError" class="error-msg mt-md hidden">Invalid ID or Password</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboardSection" class="admin-dashboard-section hidden">
+        <nav class="admin-nav">
+            <div class="container flex justify-between items-center">
+                <div class="flex items-center gap-md">
+                    <img src="../images/logo/dxelnetwork.png" alt="DXEL" style="height: 30px;">
+                    <h3 class="mb-0">Leads Dashboard</h3>
+                </div>
+                <div class="flex gap-xl">
+                    <button class="nav-tab active" data-tab="leads">Leads</button>
+                </div>
+                <div class="flex items-center gap-lg">
+                    <span id="liveStatus" class="status-badge"><span class="pulse"></span> Live Sync</span>
+                    <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container py-2xl">
+            <div class="stats-row mb-xl">
+                <div class="glass-card stat-box">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <div class="info">
+                        <span class="label">Total Leads</span>
+                        <h2 id="totalLeads">0</h2>
+                    </div>
+                </div>
+                <div class="glass-card stat-box">
+                    <div class="icon" style="color: var(--dxel-accent);"><i class="fas fa-clock"></i></div>
+                    <div class="info">
+                        <span class="label">New Today</span>
+                        <h2 id="newLeadsToday">0</h2>
+                    </div>
+                </div>
+                <div class="glass-card stat-box">
+                    <div class="icon" style="color: var(--dxel-cyan);"><i class="fas fa-check-circle"></i></div>
+                    <div class="info">
+                        <span class="label">Converted</span>
+                        <h2 id="convertedLeads">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leads View -->
+            <div id="leadsView" class="tab-view">
+                <div class="glass-card table-container">
+                    <div class="table-header flex justify-between items-center mb-lg">
+                        <h4>Recent Lead Submissions</h4>
+                        <div class="flex gap-md">
+                            <button id="refreshBtn" class="icon-btn"><i class="fas fa-sync"></i></button>
+                            <input type="text" id="searchLeads" placeholder="Search leads..." class="table-search">
+                        </div>
+                    </div>
+                    <div class="scroll-table">
+                        <table id="leadsTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name / Business</th>
+                                    <th>Type</th>
+                                    <th>Budget</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leadsBody">
+                                <!-- Leads will be injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+    <!-- Edit Lead Modal -->
+    <div id="editModal" class="modal-overlay hidden">
+        <div class="glass-card modal-content">
+            <div class="flex justify-between items-center mb-lg">
+                <h4>Edit Lead Details</h4>
+                <button class="icon-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="editForm" class="flex-col gap-md">
+                <input type="hidden" id="editLeadId">
+                <div class="form-group">
+                    <label>Name / Business</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="editEmail">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="editPhone">
+                </div>
+                <div class="form-group">
+                    <label>Budget</label>
+                    <input type="text" id="editBudget">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="editStatus" class="w-full" style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); padding: 10px; color: white; border-radius: 5px;">
+                        <option value="New">New</option>
+                        <option value="Contacted">Contacted</option>
+                        <option value="Converted">Converted</option>
+                        <option value="Lost">Lost</option>
+                    </select>
+                </div>
+                <div class="flex gap-md mt-lg">
+                    <button type="button" class="btn btn-secondary flex-1" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary flex-1">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+    <script src="../js/dxel-ai.js"></script>
+</body>
+</html>

@@ -17,9 +17,17 @@
     window.addEventListener('load', () => {
       setTimeout(() => {
         preloader.classList.add('hidden');
-        setTimeout(() => preloader.remove(), 500);
-      }, 400);
+        setTimeout(() => preloader.remove(), 400);
+      }, 200); // Reduced delay for faster feel
     });
+    
+    // Fallback if load event takes too long
+    setTimeout(() => {
+      if (!preloader.classList.contains('hidden')) {
+        preloader.classList.add('hidden');
+        setTimeout(() => preloader.remove(), 400);
+      }
+    }, 3000);
   }
 
   /* ============================
@@ -108,7 +116,16 @@
         const target = document.querySelector(targetId);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
+          const offset = 80; // Navbar height
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = target.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
         }
       });
     });
@@ -129,8 +146,8 @@
         }
       });
     }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.15,
+      rootMargin: '0px 0px -10% 0px' // Using percentage for better responsiveness
     });
 
     reveals.forEach(el => observer.observe(el));
