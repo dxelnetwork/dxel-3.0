@@ -20,7 +20,7 @@
         setTimeout(() => preloader.remove(), 400);
       }, 200); // Reduced delay for faster feel
     });
-    
+
     // Fallback if load event takes too long
     setTimeout(() => {
       if (!preloader.classList.contains('hidden')) {
@@ -297,7 +297,7 @@
           // Clone content into modal
           const body = overlay.querySelector('.modal-body');
           const image = overlay.querySelector('.modal-image img');
-          
+
           if (body) body.innerHTML = modalContent.innerHTML;
           if (image && trigger.querySelector('img')) {
             image.src = trigger.querySelector('img').src;
@@ -394,6 +394,11 @@
     const forms = document.querySelectorAll('[data-ajax-form]');
     if (!forms.length) return;
 
+    const SHEET_URLS = {
+      contactForm: 'https://script.google.com/macros/s/AKfycbydkMVw35Pq6lQLW03cZFCoYX9e91kt-Uj9pR_RbhH0PFNh8Tz8KlIsCIY1ofXy4B4/exec', // TODO: Add Contact Form Web App URL here
+      callMeForm: 'https://script.google.com/macros/s/AKfycbzO-WeUYUdN5jVl1iK4ud4cjSaf6DdaM438zBwGbR2TSM7Bzol0AoT-564omGxTYOya/exec'   // TODO: Add Call Me Form Web App URL here
+    };
+
     forms.forEach(form => {
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -455,8 +460,23 @@
           });
 
           const result = await response.text();
+          const isSuccess = result.trim().toLowerCase() === 'success';
 
-          if (result.trim().toLowerCase() === 'success') {
+          // Simultaneous submission to Google Sheet
+          const formId = form.id;
+          if (formId && SHEET_URLS[formId]) {
+            const sheetUrl = SHEET_URLS[formId];
+            if (!sheetUrl.includes('YOUR_')) {
+              try {
+                // Send POST request without blocking the UI
+                fetch(sheetUrl, { method: 'POST', body: formData }).catch(err => console.error('Sheet sync error:', err));
+              } catch (sheetErr) {
+                console.error('Google Sheet Submission failed', sheetErr);
+              }
+            }
+          }
+
+          if (isSuccess) {
             showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
             form.reset();
           } else {
@@ -593,7 +613,7 @@
     if (!track || !dotsContainer) return;
 
     const cards = track.querySelectorAll('.testimonial-card');
-    
+
     cards.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');

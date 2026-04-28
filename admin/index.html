@@ -47,7 +47,9 @@
                     <h3 class="mb-0">Leads Dashboard</h3>
                 </div>
                 <div class="flex gap-xl">
-                    <button class="nav-tab active" data-tab="leads">Leads</button>
+                    <button class="nav-tab active" data-tab="agentLeads">Lead From Agent</button>
+                    <button class="nav-tab" data-tab="contactLeads">Contact Form Lead</button>
+                    <button class="nav-tab" data-tab="callMeLeads">Call Me Form Lead</button>
                 </div>
                 <div class="flex items-center gap-lg">
                     <span id="liveStatus" class="status-badge"><span class="pulse"></span> Live Sync</span>
@@ -81,18 +83,18 @@
                 </div>
             </div>
 
-            <!-- Leads View -->
-            <div id="leadsView" class="tab-view">
+            <!-- Agent Leads View -->
+            <div id="agentLeadsView" class="tab-view">
                 <div class="glass-card table-container">
                     <div class="table-header flex justify-between items-center mb-lg">
-                        <h4>Recent Lead Submissions</h4>
+                        <h4>Agent Lead Submissions</h4>
                         <div class="flex gap-md">
-                            <button id="refreshBtn" class="icon-btn"><i class="fas fa-sync"></i></button>
-                            <input type="text" id="searchLeads" placeholder="Search leads..." class="table-search">
+                            <button class="icon-btn refresh-btn" data-tab="agentLeads"><i class="fas fa-sync"></i></button>
+                            <input type="text" class="table-search" data-tab="agentLeads" placeholder="Search agent leads...">
                         </div>
                     </div>
                     <div class="scroll-table">
-                        <table id="leadsTable">
+                        <table id="agentLeadsTable">
                             <thead>
                                 <tr>
                                     <th>Date</th>
@@ -105,7 +107,70 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody id="leadsBody">
+                            <tbody id="agentLeadsBody">
+                                <!-- Leads will be injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Leads View -->
+            <div id="contactLeadsView" class="tab-view hidden">
+                <div class="glass-card table-container">
+                    <div class="table-header flex justify-between items-center mb-lg">
+                        <h4>Contact Form Submissions</h4>
+                        <div class="flex gap-md">
+                            <button class="icon-btn refresh-btn" data-tab="contactLeads"><i class="fas fa-sync"></i></button>
+                            <input type="text" class="table-search" data-tab="contactLeads" placeholder="Search contact leads...">
+                        </div>
+                    </div>
+                    <div class="scroll-table">
+                        <table id="contactLeadsTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Service</th>
+                                    <th>Message</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contactLeadsBody">
+                                <!-- Leads will be injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call Me Leads View -->
+            <div id="callMeLeadsView" class="tab-view hidden">
+                <div class="glass-card table-container">
+                    <div class="table-header flex justify-between items-center mb-lg">
+                        <h4>Call Me Form Submissions</h4>
+                        <div class="flex gap-md">
+                            <button class="icon-btn refresh-btn" data-tab="callMeLeads"><i class="fas fa-sync"></i></button>
+                            <input type="text" class="table-search" data-tab="callMeLeads" placeholder="Search call me leads...">
+                        </div>
+                    </div>
+                    <div class="scroll-table">
+                        <table id="callMeLeadsTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Interested In</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="callMeLeadsBody">
                                 <!-- Leads will be injected here -->
                             </tbody>
                         </table>
