@@ -421,21 +421,21 @@
 /* Mobile & Tablet Responsiveness */
 @media (max-width: 768px) {
     .dxel-ai-window {
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        width: 100%;
-        height: auto; /* Dynamic viewport height replacement for virtual keyboards */
-        max-height: none;
-        border-radius: 0;
-        border: none;
-        transform: translateY(100%);
+        top: auto;
+        bottom: 150px;
+        right: 15px;
+        left: 15px;
+        width: auto;
+        height: 65vh;
+        max-height: 500px;
+        border-radius: 20px;
+        border: 1px solid rgba(108, 92, 231, 0.25);
+        transform: translateY(20px) scale(0.95);
         z-index: 10000;
     }
 
     .dxel-ai-window.open {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 
     .dxel-ai-trigger {
