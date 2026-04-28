@@ -426,11 +426,12 @@
         right: 0;
         left: 0;
         width: 100%;
-        height: 100dvh; /* Dynamic viewport height */
-        max-height: 100vh; /* Fallback */
+        height: auto; /* Dynamic viewport height replacement for virtual keyboards */
+        max-height: none;
         border-radius: 0;
         border: none;
         transform: translateY(100%);
+        z-index: 10000;
     }
 
     .dxel-ai-window.open {
@@ -440,21 +441,31 @@
     .dxel-ai-trigger {
         bottom: 85px; /* Keeps it above mobile navigation */
         right: 20px;
-        width: 50px;
-        height: 50px;
+        width: 54px;
+        height: 54px;
     }
     
     .dxel-ai-header {
-        padding: 12px 15px;
-        padding-top: max(12px, env(safe-area-inset-top)); /* iOS Notch support */
+        padding: 15px 20px;
+        padding-top: max(15px, env(safe-area-inset-top)); /* iOS Notch support */
     }
     
     .dxel-ai-messages {
-        padding: 15px;
+        padding: 15px 20px;
     }
     
     .dxel-ai-input-area {
-        padding: 10px 15px;
-        padding-bottom: max(10px, env(safe-area-inset-bottom)); /* iOS Home bar support */
+        padding: 12px 20px;
+        padding-bottom: max(12px, env(safe-area-inset-bottom)); /* iOS Home bar support */
+    }
+
+    .dxel-ai-input {
+        font-size: 16px; /* Crucial: Prevents iOS Safari auto-zoom on input focus */
+        padding: 12px 16px;
+    }
+
+    .dxel-ai-send {
+        width: 44px;
+        height: 44px;
     }
 }
