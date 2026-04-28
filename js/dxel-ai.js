@@ -197,13 +197,13 @@ async function init(){
   widget.id='dxel-ai-widget';
   widget.innerHTML=`
     <button class="dxel-ai-trigger" id="dxelAiTrigger" aria-label="Chat">
-      <svg class="trigger-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.74.46 3.37 1.26 4.78L2 22l5.22-1.26C8.63 21.54 10.26 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-2h2v2zm2.07-4.75l-.9.92C11.45 12.9 11 13.5 11 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H6c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
-      <svg class="trigger-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      <svg class="trigger-icon" viewBox="0 0 24 24"><ellipse cx="12" cy="11" rx="10" ry="9" fill="#ffffff" /><ellipse cx="12" cy="11" rx="8" ry="5" fill="#1a1a2e" /><path class="eve-eye" d="M8 11.5C8 10.5 9 10 10.5 11" stroke="#00cec9" stroke-width="1.8" stroke-linecap="round" fill="none" /><path class="eve-eye" d="M16 11.5C16 10.5 15 10 13.5 11" stroke="#00cec9" stroke-width="1.8" stroke-linecap="round" fill="none" /></svg>
+      <svg class="trigger-close" viewBox="0 0 24 24"><path fill="#ffffff" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
       <span class="dxel-ai-badge"></span>
     </button>
     <div class="dxel-ai-window" id="dxelAiWindow">
       <div class="dxel-ai-header">
-        <div class="dxel-ai-avatar"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+        <div class="dxel-ai-avatar"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="11" rx="10" ry="9" fill="#ffffff" /><ellipse cx="12" cy="11" rx="8" ry="5" fill="#1a1a2e" /><path class="eve-eye" d="M8 11.5C8 10.5 9 10 10.5 11" stroke="#00cec9" stroke-width="1.8" stroke-linecap="round" fill="none" /><path class="eve-eye" d="M16 11.5C16 10.5 15 10 13.5 11" stroke="#00cec9" stroke-width="1.8" stroke-linecap="round" fill="none" /></svg></div>
         <div class="dxel-ai-header-info"><h4>DXEL AI</h4><span>● Advanced Processing Active</span></div>
         <button class="dxel-ai-header-close" id="dxelAiClose">✕</button>
       </div>
