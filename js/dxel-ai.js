@@ -26,7 +26,7 @@ let brain = {
 let state = { mode: 'chat', step: 0, leadData: {}, history: [], topic: null };
 
 const LEAD_STEPS = [
-  { key: 'name', question: 'Awesome! Let\'s get started. What is your <strong>name</strong> or <strong>business name</strong>?', quick: [] },
+  { key: 'name / business', question: 'Awesome! Let\'s get started. What is your <strong>name</strong> or <strong>business name</strong>?', quick: [] },
   { key: 'type', question: 'Nice to meet you! What <strong>type of website or service</strong> do you need? (Web, Marketing, or Other?)', quick: ['Web Dev','Marketing','Other'] },
   { key: 'budget', question: 'Great. What is your <strong>approximate budget range</strong>?', quick: ['$1500 - $3000','$3000 - $5000','$5000+'] },
   { key: 'location', question: 'Got it. And what <strong>city or country</strong> are you located in?', quick: [] },
@@ -62,7 +62,7 @@ async function fetchBrain() {
 
 async function submitLead(data) {
   try {
-    data.timestamp = new Date().toISOString();
+    data.date = new Date().toISOString();
     await fetch('https://script.google.com/macros/s/AKfycby1wJEExmbIMybJ5n83ZKZcGUzbKcQDz6tds9bG2Rmz3gEbd0nD6oLfLFd3yf85ub5z/exec', {
       method: 'POST',
       mode: 'no-cors',
@@ -166,7 +166,7 @@ function handleLeadCollection(msg) {
   if (state.step < LEAD_STEPS.length) {
     const nextStep = LEAD_STEPS[state.step];
     let q = nextStep.question;
-    if (currentStep.key === 'name' && brain.KB.greetings.personalized) {
+    if (currentStep.key === 'name / business' && brain.KB.greetings.personalized) {
         q = `${brain.KB.greetings.personalized.replace('{name}', msg)}<br><br>${nextStep.question}`;
     }
     return { text: q, quick: nextStep.quick };

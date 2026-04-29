@@ -465,34 +465,14 @@
           
           const response = await fetch(sheetUrl, {
             method: 'POST',
+            mode: 'no-cors',
             body: formData
           });
 
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-
-          const resultText = await response.text();
-          
-          let isSuccess = false;
-          if (resultText.trim().toLowerCase().includes('success')) {
-              isSuccess = true;
-          } else {
-              try {
-                  const resultJson = JSON.parse(resultText);
-                  if (resultJson.success || resultJson.result === 'success') isSuccess = true;
-              } catch (e) {
-                  // Not JSON
-              }
-          }
-
-          if (isSuccess) {
-            showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
-            form.reset();
-          } else {
-            console.error('Submission failed with response:', resultText);
-            showToast('Something went wrong. Please try again.', 'error');
-          }
+          // In no-cors mode, we cannot read the response body.
+          // Since the fetch didn't throw a network error, we assume it was successfully dispatched.
+          showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
+          form.reset();
         } catch (error) {
           console.error('Submission error:', error);
           showToast('Network error or server unreachable. Please try again.', 'error');
