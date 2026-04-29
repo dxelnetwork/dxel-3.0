@@ -66,7 +66,11 @@ async function fetchLeads(tabId) {
             console.warn('Google Sheet URL not configured for', tabId);
             return;
         }
-        const res = await fetch(url);
+        
+        // Add timestamp to bypass browser caching
+        const fetchUrl = url + (url.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+        
+        const res = await fetch(fetchUrl);
         const data = await res.json();
 
         if (data.success && data.leads) {
@@ -98,25 +102,38 @@ function renderLeads(tabId, leads) {
         const row = document.createElement('tr');
 
         let dateStr = 'Unknown Date';
-        const rawDate = lead.timestamp || lead.date;
+        const rawDate = lead.timestamp || lead.date || lead.Date || lead.Timestamp;
         if (rawDate) {
-            try { dateStr = new Date(rawDate).toLocaleDateString(); } catch (e) { }
+            try { 
+                const d = new Date(rawDate);
+                if (!isNaN(d)) {
+                    dateStr = d.toLocaleDateString(); 
+                } else {
+                    dateStr = String(rawDate);
+                }
+            } catch (e) { 
+                dateStr = String(rawDate);
+            }
         }
 
-        const status = lead.status || 'New';
+        const status = lead.status || lead.Status || 'New';
         const statusClass = `status-${status.toLowerCase()}`;
 
         let colsHTML = '';
 
         if (tabId === 'agentLeads') {
-            const name = lead.name || lead['name / business'] || 'Anonymous';
+            const name = lead.name || lead.Name || lead['name / business'] || lead['name/business'] || lead['Name / Business'] || lead.business || 'Anonymous';
+            const type = lead.type || lead.Type || 'N/A';
+            const budget = lead.budget || lead.Budget || 'N/A';
+            const email = lead.email || lead.Email || 'N/A';
+            const phone = lead.phone || lead.Phone || 'N/A';
             colsHTML = `
                 <td>${dateStr}</td>
                 <td><strong>${name}</strong></td>
-                <td>${lead.type || 'N/A'}</td>
-                <td>${lead.budget || 'N/A'}</td>
-                <td>${lead.email || 'N/A'}</td>
-                <td>${lead.phone || 'N/A'}</td>
+                <td>${type}</td>
+                <td>${budget}</td>
+                <td>${email}</td>
+                <td>${phone}</td>
             `;
         } else if (tabId === 'contactLeads') {
             const name = lead.name || 'Anonymous';

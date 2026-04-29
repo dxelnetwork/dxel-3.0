@@ -454,36 +454,48 @@
 
         try {
           const formData = new FormData(form);
-          const response = await fetch(actionUrl, {
+          const formId = form.id;
+          
+          if (!formId || !SHEET_URLS[formId]) {
+              showToast('Form configuration error.', 'error');
+              return;
+          }
+
+          const sheetUrl = SHEET_URLS[formId];
+          
+          const response = await fetch(sheetUrl, {
             method: 'POST',
             body: formData
           });
 
-          const result = await response.text();
-          const isSuccess = result.trim().toLowerCase() === 'success';
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
 
-          // Simultaneous submission to Google Sheet
-          const formId = form.id;
-          if (formId && SHEET_URLS[formId]) {
-            const sheetUrl = SHEET_URLS[formId];
-            if (!sheetUrl.includes('YOUR_')) {
+          const resultText = await response.text();
+          
+          let isSuccess = false;
+          if (resultText.trim().toLowerCase().includes('success')) {
+              isSuccess = true;
+          } else {
               try {
-                // Send POST request without blocking the UI
-                fetch(sheetUrl, { method: 'POST', body: formData }).catch(err => console.error('Sheet sync error:', err));
-              } catch (sheetErr) {
-                console.error('Google Sheet Submission failed', sheetErr);
+                  const resultJson = JSON.parse(resultText);
+                  if (resultJson.success || resultJson.result === 'success') isSuccess = true;
+              } catch (e) {
+                  // Not JSON
               }
-            }
           }
 
           if (isSuccess) {
             showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
             form.reset();
           } else {
-            showToast(result || 'Something went wrong. Please try again.', 'error');
+            console.error('Submission failed with response:', resultText);
+            showToast('Something went wrong. Please try again.', 'error');
           }
         } catch (error) {
-          showToast('Network error. Please check your connection.', 'error');
+          console.error('Submission error:', error);
+          showToast('Network error or server unreachable. Please try again.', 'error');
         } finally {
           if (submitBtn) {
             submitBtn.disabled = false;
