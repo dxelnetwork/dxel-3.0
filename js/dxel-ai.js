@@ -1,4 +1,4 @@
-/* DXEL AI — Intelligent Chatbot Engine v1.6 (Service Specific Logic) */
+/* DXEL AI — Intelligent Chatbot Engine v2.0 (Nyx Edition) */
 (function(){
 'use strict';
 
@@ -23,22 +23,39 @@ let brain = {
 };
 
 
-let state = { mode: 'chat', step: 0, leadData: {}, history: [] };
+let state = { mode: 'chat', step: 0, leadData: {}, history: [], topic: null };
 
 const LEAD_STEPS = [
   { key: 'name', question: 'Awesome! Let\'s get started. What is your <strong>name</strong> or <strong>business name</strong>?', quick: [] },
   { key: 'type', question: 'Nice to meet you! What <strong>type of website or service</strong> do you need? (Web, Marketing, or Other?)', quick: ['Web Dev','Marketing','Other'] },
   { key: 'budget', question: 'Great. What is your <strong>approximate budget range</strong>?', quick: ['$1500 - $3000','$3000 - $5000','$5000+'] },
+  { key: 'location', question: 'Got it. And what <strong>city or country</strong> are you located in?', quick: [] },
   { key: 'email', question: 'Perfect. What is your <strong>email address</strong>?', quick: [] },
   { key: 'phone', question: 'Lastly, what is your <strong>phone number</strong>?', quick: [] }
 ];
 
+function loadState() {
+  try {
+    const saved = localStorage.getItem('dxel_nyx_state');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed.topic) state.topic = parsed.topic;
+    }
+  } catch(e) {}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('dxel_nyx_state', JSON.stringify({ topic: state.topic }));
+  } catch(e) {}
+}
+
 async function fetchBrain() {
   if (window.DXEL_AI_TRAINING_DATA) {
     brain = window.DXEL_AI_TRAINING_DATA;
-    console.log('DXEL AI: Permanent Static Memory Loaded.');
+    console.log('Nyx: Persistent Memory Loaded.');
   } else {
-    console.warn('DXEL AI: Static memory missing, using fallbacks.');
+    console.warn('Nyx: Static memory missing, using fallbacks.');
   }
 }
 
@@ -91,7 +108,21 @@ function processSingleQuery(q) {
         return getBaseResponse('off_topic');
     }
 
-    return getBaseResponse(intent);
+    let res = getBaseResponse(intent);
+
+    // Context / Topic Switching Logic
+    const skipTopics = ['greeting', 'close_lead', 'off_topic', 'contact', 'goodbye', 'trust_building'];
+    if (intent && !skipTopics.includes(intent)) {
+      if (state.topic && state.topic !== intent) {
+        const oldTopic = state.topic.replace(/_/g, ' ');
+        // Append polite reminder of previous topic
+        res.text += `<br><br>*(By the way, let me know if you still wanted to discuss ${oldTopic}!)*`;
+      }
+      state.topic = intent;
+      saveState();
+    }
+
+    return res;
 }
 
 function handleMultiQuery(queries) {
@@ -119,59 +150,14 @@ function getBaseResponse(intent) {
     };
   }
 
+  // Fallback defaults if not in training data
   switch(intent){
     case 'greeting':
       return {text:`Hi 👋 Welcome to <strong>${brain.KB.company.name}</strong>.\n${brain.KB.company.tagline}\n\nAre you looking to build a new website or scale your business with marketing?`, quick:['Build Website','Growth Marketing']};
-    
-    case 'facebook_marketing':
-      return {text:`📱 <strong>Facebook & Meta Ads Mastery</strong>\nWe specialize in high-converting Facebook and Instagram ad campaigns. Our focus is on ROI, custom audiences, and creative testing that actually drives sales.\n\nWant us to audit your current ads or start a new campaign?`, quick:['Audit My Ads','Start FB Ads','Pricing']};
-    
-    case 'google_marketing':
-      return {text:`🔍 <strong>Google Ads & PPC Strategy</strong>\nWe get your business in front of customers exactly when they are searching for you. Our expert-led SEM campaigns focus on lower cost-per-lead and maximum visibility.\n\nInterested in a custom Google Ads strategy?`, quick:['Get PPC Plan','Google Audit','Contact Us']};
-
-    case 'marketing_general':
-      return {text:`Growth is our priority 🚀 We offer full-stack marketing including SEO, Social Media Ads, and Sales Funnels.\n\nWhich area should we focus on for your business?`, quick:['Facebook Ads','Google Ads','SEO Support']};
-
-    case 'microsoft_partner':
-      return {text: brain.RESPONSES?.microsoft_partner || "We are a proud <strong>Microsoft AI Cloud Partner</strong>, leveraging advanced cloud and AI technology to drive business growth.", quick:['Learn More','Start Project']};
-    
-    case 'ui_ux_design':
-      return {text: brain.RESPONSES?.ui_ux_design || "Our UI/UX team creates stunning, user-centered designs that deliver exceptional digital experiences.", quick:['View Design Services','Portfolio']};
-
-    case 'mobile_apps':
-      return {text: brain.RESPONSES?.mobile_apps || "We build native and cross-platform mobile apps for iOS and Android using Swift, Kotlin, and React Native.", quick:['App Strategy','Get Quote']};
-
-    case 'ecommerce_detail':
-      return {text: brain.RESPONSES?.ecommerce_detail || "We build powerful online stores on Shopify and WooCommerce that convert visitors into customers.", quick:['Start Store','Pricing']};
-
-    case 'team_experts':
-      return {text: brain.RESPONSES?.team_experts || "Our team consists of industry veterans dedicated to your success. Led by our founder Md Mehedi Hasan.", quick:['Meet the Team','Contact Us']};
-
-    case 'company_story':
-      return {text: brain.RESPONSES?.company_story || "DXEL stands for Digital Experience & Enterprise Leadership. We've been driving innovation for over 11 years.", quick:['About Us','Our Values']};
-
-    case 'legal_info':
-      return {text: brain.RESPONSES?.legal_info || "You can view our legal documents here: [Privacy Policy](privacy-policy.html) and [Terms](terms-conditions.html).", quick:['Privacy Policy','Terms']};
-
-    case 'trust_building':
-      return {text: brain.RESPONSES?.trust_building || `We've completed over ${brain.KB.company.projects} projects with 11+ years of experience.`, quick:['View Portfolio','Start Project']};
-
-    case 'budget_check':
-      return {text:`Our pricing is performance-based. We offer packages starting from $1,500 for web projects and $400/mo for marketing management.\n\nWant a custom quote based on your needs?`, quick:['Get Custom Quote','View Packages']};
-    
-    case 'portfolio':
-      return {text:`We've completed over ${brain.KB.company.projects} projects! Check out our latest work: <a href="projects.html">View Portfolio →</a>`, quick:['Start Project','Our Services']};
-    
-    case 'contact':
-      return {text:`You can reach us at <a href="mailto:${brain.KB.company.email}">${brain.KB.company.email}</a> or call ${brain.KB.company.phone}.`, quick:['Start here','WhatsApp Us']};
-
     default:
       return {text: brain.KB.behavior.fallbacks.clarify, quick:['New Website','Marketing Help']};
   }
 }
-
-
-
 
 function handleLeadCollection(msg) {
   const currentStep = LEAD_STEPS[state.step];
@@ -186,6 +172,8 @@ function handleLeadCollection(msg) {
     return { text: q, quick: nextStep.quick };
   } else {
     state.mode = 'chat'; submitLead(state.leadData);
+    state.topic = null; // Clear topic after lead
+    saveState();
     return { text: brain.KB.greetings.end, quick: ['Services','Portfolio'] };
   }
 }
@@ -193,6 +181,8 @@ function handleLeadCollection(msg) {
 // UI Initialization
 async function init(){
   await fetchBrain();
+  loadState();
+
   const widget=document.createElement('div');
   widget.id='dxel-ai-widget';
   widget.innerHTML=`
@@ -204,12 +194,12 @@ async function init(){
     <div class="dxel-ai-window" id="dxelAiWindow">
       <div class="dxel-ai-header">
         <div class="dxel-ai-avatar"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="11" rx="10" ry="9" fill="#ffffff" /><ellipse cx="12" cy="11" rx="8" ry="5" fill="#1a1a2e" /><path class="eve-eye" d="M8 11.5C8 10.5 9 10 10.5 11" stroke="#00cec9" stroke-width="1.8" stroke-linecap="round" fill="none" /><path class="eve-eye" d="M16 11.5C16 10.5 15 10 13.5 11" stroke="#00cec9" stroke-width="1.8" stroke-linecap="round" fill="none" /></svg></div>
-        <div class="dxel-ai-header-info"><h4>DXEL AI</h4><span>● Advanced Processing Active</span></div>
+        <div class="dxel-ai-header-info"><h4>Nyx</h4><span>● AI Assistant Active</span></div>
         <button class="dxel-ai-header-close" id="dxelAiClose">✕</button>
       </div>
       <div class="dxel-ai-messages" id="dxelAiMessages"></div>
       <div class="dxel-ai-input-area">
-        <input type="text" class="dxel-ai-input" id="dxelAiInput" placeholder="Type your message..." autocomplete="off">
+        <input type="text" class="dxel-ai-input" id="dxelAiInput" placeholder="Message Nyx..." autocomplete="off">
         <button class="dxel-ai-send" id="dxelAiSend"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
       </div>
       <div class="dxel-ai-footer">Intelligent Service Expert Active</div>
@@ -220,7 +210,11 @@ async function init(){
 
   function toggleChat(){
     const open=win.classList.toggle('open'); trigger.classList.toggle('active',open);
-    if(open){ if(badge)badge.style.display='none'; if(!msgs.children.length) showWelcome(); setTimeout(()=>input.focus(),350); }
+    if(open){ 
+        if(badge)badge.style.display='none'; 
+        if(!msgs.children.length) showWelcome(); 
+        setTimeout(()=>input.focus(),350); 
+    }
   }
 
   function addMsg(text,type,quickReplies){
@@ -245,9 +239,17 @@ async function init(){
   }
 
   function showWelcome(){
-    const list = brain.KB.greetings.start || ["Hi!"];
-    const text = list[Math.floor(Math.random() * list.length)];
-    addMsg(text,'bot',['I want to start','Pricing','Our Portfolio']);
+    let text;
+    // Session memory return greeting
+    if (state.topic && brain.KB.greetings.return_greetings) {
+      const list = brain.KB.greetings.return_greetings;
+      const formattedTopic = state.topic.replace(/_/g, ' ');
+      text = list[Math.floor(Math.random() * list.length)].replace('{topic}', formattedTopic);
+    } else {
+      const list = brain.KB.greetings.start || ["Hi! I'm Nyx."];
+      text = list[Math.floor(Math.random() * list.length)];
+    }
+    addMsg(text,'bot',['Start Project','Our Services','Portfolio']);
   }
 
   function handleUserMsg(text){

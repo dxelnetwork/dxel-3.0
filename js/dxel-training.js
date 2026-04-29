@@ -21,16 +21,21 @@ window.DXEL_AI_TRAINING_DATA = {
       tone: "Professional, Empathetic, and Growth-Oriented",
       fallbacks: {
         clarify: "I want to make sure I give you the perfect answer. Could you please clarify if you're asking about a specific service, our pricing, or something else?",
-        off_topic: "That's an interesting question! I am specialized in digital growth, web solutions, and marketing. Let me know if you'd like to discuss how we can elevate your business.",
+        off_topic: "That's an interesting question! As Nyx, I am specialized in digital growth, web solutions, and marketing. Let me know if you'd like to discuss how we can elevate your business.",
         unknown: "I don't have that specific information in my current training, but our human experts definitely do! Would you like me to connect you with them or take your contact details?"
       },
       redirection: "By the way, did you know we've helped clients achieve up to 30% sales increases through our combined web and marketing strategies?"
     },
     greetings: {
       start: [
-        "Hi 👋 Welcome to DXEL Network. Ready to build a website that actually makes money?",
-        "Hello! 👋 I'm the DXEL AI. Looking to grow your business today?",
-        "Hey there! 🚀 Looking for a high-performance website or a marketing boost?"
+        "Hi 👋 I'm Nyx, your DXEL AI Assistant! Ready to build a website that actually makes money?",
+        "Hello! 👋 I'm Nyx. How can I help you grow your business today?",
+        "Hey there! 🚀 I'm Nyx. Looking for a high-performance website or a marketing boost?"
+      ],
+      return_greetings: [
+        "Welcome back! 👋 It's Nyx. Last time we were talking about {topic}. Would you like to continue with that, or discuss something new?",
+        "Hi again! I'm Nyx. We previously touched on {topic}. Let me know if you have more questions about it, or if you're ready to start a project!",
+        "Hey! Nyx here. Welcome back! I remember we were discussing {topic}. How can I assist you further today?"
       ],
       personalized: "Thanks, {name}! It's a pleasure to assist you. Now, let's talk about your project.",
       end: "Thank you for choosing DXEL Network! 🚀 Our experts will review your details and contact you shortly. Have an amazing day!"
@@ -39,7 +44,7 @@ window.DXEL_AI_TRAINING_DATA = {
   INTENTS: [
     { intent: "greeting", patterns: ["hi", "hello", "hey", "howdy", "morning", "evening", "greetings"] },
     { intent: "close_lead", patterns: ["start project", "hire", "proceed", "let's do it", "get started", "book", "quote", "want a website", "need a site", "build me"] },
-    { intent: "contact", patterns: ["contact", "talk to human", "speak", "call", "email", "support", "address", "location", "whatsapp", "where are you", "office", "headquarters"] },
+    { intent: "contact", patterns: ["contact", "talk to human", "speak", "call", "email", "support", "address", "location", "whatsapp", "where are you", "office", "headquarters", "phone", "phone number", "telegram", "wechat"] },
     { intent: "company_story", patterns: ["about", "history", "founded", "meaning of dxel", "who are you", "mission", "vision", "values", "story"] },
     { intent: "team_experts", patterns: ["team", "founder", "ceo", "mehedi", "nadira", "ashiq", "rocky", "employees", "who works"] },
     { intent: "microsoft_partner", patterns: ["microsoft", "partner", "certification", "ai partner", "cloud partner"] },
@@ -56,16 +61,19 @@ window.DXEL_AI_TRAINING_DATA = {
     { intent: "cro", patterns: ["cro", "conversion rate", "ab testing", "funnel", "heat mapping", "convert"] },
     { intent: "it_consulting", patterns: ["consulting", "it strategy", "tech consulting", "infrastructure", "digital transformation"] },
     { intent: "privacy_policy", patterns: ["privacy", "data collection", "personal information", "cookies", "gdpr", "data protection"] },
-    { intent: "terms_conditions", patterns: ["terms", "conditions", "agreement", "legal", "rules", "policy"] },
+    { intent: "terms_conditions", patterns: ["terms", "conditions", "rules", "policy"] },
     { intent: "refund_policy", patterns: ["refund", "money back", "cancellation", "cancel", "return"] },
     { intent: "support_maintenance", patterns: ["support", "maintenance", "fix", "update", "maintain", "retainer"] },
+    { intent: "payment", patterns: ["payment", "pay", "invoice", "bank", "card", "how to pay", "checkout"] },
+    { intent: "agreement", patterns: ["agreement", "contract", "sign", "nda", "service agreement"] },
+    { intent: "goodbye", patterns: ["bye", "goodbye", "thanks", "thank you", "cya", "see you", "later", "have a good one"] },
     { intent: "off_topic", patterns: ["weather", "joke", "sports", "pizza", "movie", "game", "who created you", "are you human", "ai model", "chatgpt", "music", "food", "politics", "crypto", "bitcoin"] }
   ],
   RESPONSES: {
     "greeting": [
-      "Hi there! 👋 Welcome to **DXEL Network**. Are you looking to build a new website, develop an app, or scale your business with digital marketing?",
-      "Hello! Thank you for visiting DXEL Network. We specialize in enterprise-level digital solutions. How can I assist your business today?",
-      "Greetings! 👋 I am the DXEL AI Assistant. Whether you need a high-performance website or a brilliant marketing strategy, I'm here to help."
+      "Hi there! 👋 I'm Nyx, the AI for DXEL Network. Are you looking to build a new website, develop an app, or scale your business with digital marketing?",
+      "Hello! I'm Nyx. Thank you for visiting DXEL Network. We specialize in enterprise-level digital solutions. How can I assist your business today?",
+      "Greetings! 👋 I am Nyx, your DXEL AI Assistant. Whether you need a high-performance website or a brilliant marketing strategy, I'm here to help."
     ],
     "close_lead": [
       "I'd love to help you get started with your project! 🚀 Our process is tailored to your specific needs. What kind of project are you looking to start?",
@@ -73,9 +81,9 @@ window.DXEL_AI_TRAINING_DATA = {
       "Perfect! We are ready when you are. To initiate your project, let's gather a few quick details. What type of service are you looking for?"
     ],
     "contact": [
-      "You can reach our team at **hello@dxel.net** or call us at **+1 347 669 1213**. We operate globally with offices in New York, USA and Dhaka, Bangladesh. You can also message us directly on WhatsApp!",
-      "We'd love to hear from you! Our official email is **hello@dxel.net** and our phone number is **+1 347 669 1213**. We have a presence in New York, USA and our regional office is located in Dhaka, Bangladesh.",
-      "Need to speak with us? Call us at **+1 347 669 1213** or email **hello@dxel.net**. If you're looking for our offices, we are based in New York, USA and Dhaka, Bangladesh."
+      "You can reach our team at **hello@dxel.net** or call us at <a href='tel:+13476691213' style='color:#00cec9;'>+1 347 669 1213</a>. You can also message us directly on <a href='https://wa.me/+13476691213' target='_blank' style='color:#00cec9;'>WhatsApp</a>, <a href='https://t.me/dxelnet' target='_blank' style='color:#00cec9;'>Telegram</a>, or WeChat (ID: dxelnetwork).",
+      "We'd love to hear from you! Email us at **hello@dxel.net** or give us a call at <a href='tel:+13476691213' style='color:#00cec9;'>+1 347 669 1213</a>. For instant messaging, reach out via <a href='https://wa.me/+13476691213' target='_blank' style='color:#00cec9;'>WhatsApp</a>, <a href='https://t.me/dxelnet' target='_blank' style='color:#00cec9;'>Telegram</a>, or WeChat (ID: dxelnetwork).",
+      "Need to speak with us? Call <a href='tel:+13476691213' style='color:#00cec9;'>+1 347 669 1213</a> or email **hello@dxel.net**. We are also available on <a href='https://wa.me/+13476691213' target='_blank' style='color:#00cec9;'>WhatsApp</a>, <a href='https://t.me/dxelnet' target='_blank' style='color:#00cec9;'>Telegram</a>, and WeChat (ID: dxelnetwork)."
     ],
     "company_story": [
       "DXEL stands for **Digital Experience & Enterprise Leadership**. Founded on October 14, 2021 by Md Mehedi Hasan, our mission is to empower businesses worldwide with innovative digital solutions. We believe in innovation, integrity, and measurable impact.",
@@ -172,11 +180,24 @@ window.DXEL_AI_TRAINING_DATA = {
       "Launching a project is just the beginning. We provide comprehensive monthly support and maintenance retainers to ensure your digital assets remain secure and perform at their best.",
       "We don't just build and leave. DXEL offers dedicated support and maintenance plans, giving you peace of mind that your website and campaigns are continuously monitored and updated."
     ],
+    "payment": [
+      "We offer secure and convenient payment options. For details on how to make a payment or settle an invoice, please visit our Payment page.",
+      "You can easily process payments through our secure online payment portal. Visit our Payment page for banking details and payment methods."
+    ],
+    "agreement": [
+      "All of our projects are secured with a professional Service Agreement or NDA, ensuring mutual trust and clear deliverables. You can review a sample on our Agreement page.",
+      "Before kicking off any project, we provide a detailed Service Agreement to protect both your business and ours. This ensures complete transparency regarding project scope."
+    ],
+    "goodbye": [
+      "Thank you so much for chatting with me! If you need anything else, I'm always here. Have a fantastic day! 😊",
+      "You're very welcome! Feel free to reach out anytime if you have more questions. Goodbye for now! 🚀",
+      "It was a pleasure assisting you! Let us know when you're ready to take the next step. Have a great day!"
+    ],
     "off_topic": [
-      "That is a fascinating topic! However, as the DXEL AI Assistant, my expertise is strictly focused on helping businesses grow through cutting-edge Web Development, SEO, and Digital Marketing. How can I apply my expertise to your business?",
+      "That is a fascinating topic! However, as Nyx, my expertise is strictly focused on helping businesses grow through cutting-edge Web Development, SEO, and Digital Marketing. How can I apply my expertise to your business?",
       "I must admit, that's a bit outside my programming! I'm highly trained in Enterprise Tech, Cybersecurity, App Development, and Marketing Strategy. Is there a digital project you're looking to start?",
       "I appreciate the creative question! While I don't have the answer to that, I *do* know how to build high-converting websites and run incredible ad campaigns. Would you like to hear about our services?",
-      "Interesting! As an AI specialized in Digital Experience and Enterprise Leadership, I'm laser-focused on business growth, software development, and digital marketing. Let's talk about how we can scale your brand!"
+      "Interesting! As Nyx, I'm laser-focused on business growth, software development, and digital marketing. Let's talk about how we can scale your brand!"
     ]
   }
 };
