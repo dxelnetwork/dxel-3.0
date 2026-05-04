@@ -1174,36 +1174,36 @@
                 </div> <!-- end of col-->
                 <div class="col-md-6">
                     <!-- Privacy Form -->
-                    <div class="form-container">
+                    <div class="glass-card">
                         <form id="privacyForm" data-toggle="validator" data-focus="false">
                             <div class="form-group">
-                                <input type="text" class="form-control-input" id="pname" required>
-                                <label class="label-control" for="pname">Name</label>
+                                <input type="text" class="form-input" id="pname" placeholder="Name" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control-input" id="pemail" required>
-                                <label class="label-control" for="pemail">Email</label>
+                                <input type="email" class="form-input" id="pemail" placeholder="Email" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <select class="form-control-select" id="pselect" required>
-                                    <option class="select-option" value="" disabled selected>Select Option</option>
-                                    <option class="select-option" value="Delete data">Delete my data</option>
-                                    <option class="select-option" value="Show me data">Show me my data</option>
+                                <select class="form-select" id="pselect" required>
+                                    <option value="" disabled selected>Select Option</option>
+                                    <option value="Delete data">Delete my data</option>
+                                    <option value="Show me data">Show me my data</option>
                                 </select>
                                 <div class="help-block with-errors"></div>
                             </div>
-                            <div class="form-group checkbox">
-                                <input type="checkbox" id="pterms" value="Agreed-to-Terms" required>I have read and
-                                agree to DXEL's <a href="privacy-policy.html">Privacy Policy</a> and <a
-                                    href="terms-conditions.html">Terms &amp; Conditions</a>
+                            <div class="form-group">
+                                <label class="form-checkbox">
+                                    <input type="checkbox" id="pterms" value="Agreed-to-Terms" required>
+                                    <span>I have read and agree to DXEL's <a href="privacy-policy.html">Privacy Policy</a> and <a
+                                        href="terms-conditions.html">Terms &amp; Conditions</a></span>
+                                </label>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="form-control-submit-button">SUBMIT</button>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">SUBMIT</button>
                             </div>
-                            <div class="form-message">
+                            <div class="form-message mt-3">
                                 <div id="pmsgSubmit" class="h3 text-center hidden"></div>
                             </div>
                         </form>
