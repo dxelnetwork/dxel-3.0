@@ -27,7 +27,7 @@ loginForm.addEventListener('submit', (e) => {
     const id = document.getElementById('adminId').value;
     const password = document.getElementById('adminPass').value;
 
-    if (id === 'admin' && password === 'password123') {
+    if (id === 'admin' && password === 'Oronno@91') {
         localStorage.setItem('dxel_admin_token', 'valid_static_token');
         authToken = 'valid_static_token';
         showDashboard();
@@ -66,10 +66,10 @@ async function fetchLeads(tabId) {
             console.warn('Google Sheet URL not configured for', tabId);
             return;
         }
-        
+
         // Add timestamp to bypass browser caching
         const fetchUrl = url + (url.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
-        
+
         const res = await fetch(fetchUrl);
         const data = await res.json();
 
@@ -104,14 +104,14 @@ function renderLeads(tabId, leads) {
         let dateStr = 'Unknown Date';
         const rawDate = lead.timestamp || lead.date || lead.Date || lead.Timestamp;
         if (rawDate) {
-            try { 
+            try {
                 const d = new Date(rawDate);
                 if (!isNaN(d)) {
-                    dateStr = d.toLocaleDateString(); 
+                    dateStr = d.toLocaleDateString();
                 } else {
                     dateStr = String(rawDate);
                 }
-            } catch (e) { 
+            } catch (e) {
                 dateStr = String(rawDate);
             }
         }
