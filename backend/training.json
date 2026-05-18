@@ -1,0 +1,74 @@
+{
+  "KB": {
+    "company": {
+      "name": "DXEL Network",
+      "tagline": "Digital Experience & Enterprise Leadership",
+      "mission": "To empower businesses worldwide with innovative digital solutions that drive growth, efficiency, and competitive advantage.",
+      "vision": "To be the most trusted digital partner for businesses seeking to transform, innovate, and lead in their industries.",
+      "values": ["Customer-centric", "Results-driven", "Collaborative", "Innovative", "Transparent", "Passionate"],
+      "email": "hello@dxel.net",
+      "phone": "+1 347 669 1213",
+      "whatsapp": "+1 347 669 1213",
+      "projects": "992+",
+      "experience": "11+ Years",
+      "headquarters": "New York, USA",
+      "certification": "Microsoft AI Cloud Partner",
+      "team": [
+        { "name": "Md Mehedi Hasan", "role": "Founder & Front-end Developer" },
+        { "name": "Nadira Ferdous", "role": "Head of Communications" },
+        { "name": "Ashiq Ali", "role": "Software Analyst" },
+        { "name": "Md Rocky Biswas", "role": "Search-Opt Strategist" }
+      ]
+    },
+    "behavior": {
+      "tone": "Professional, Empathetic, and Growth-Oriented",
+      "fallbacks": {
+        "clarify": "I want to make sure I give you the right information. Could you please clarify if you're asking about our services or something else?",
+        "off_topic": "That's an interesting question! While I'm specialized in helping businesses grow with high-performance digital solutions, I'd love to see how we can apply our expertise to your specific goals. Would you like to see our core services?",
+        "unknown": "I'm not quite sure about that one, but I'd be happy to connect you with one of our human experts who can help. Would you like to leave your details?"
+      },
+      "redirection": "By the way, did you know that integrating your marketing with a high-performance website can increase your conversion rate by up to 200%? We specialize in creating that synergy."
+    },
+    "greetings": {
+      "start": [
+        "Hi 👋 Welcome to DXEL Network. Ready to build a website that actually makes money?",
+        "Hello! 👋 I'm the DXEL AI. Looking to grow your business today?",
+        "Hey there! 🚀 Looking for a high-performance website or a marketing boost?"
+      ],
+      "personalized": "Thanks, {name}! It's a pleasure to assist you. Now, let's talk about your project.",
+      "end": "Thank you for choosing DXEL Network! 🚀 Our experts will review your details and contact you within 2 hours. Have an amazing day!"
+    }
+  },
+  "INTENTS": [
+    { "intent": "greeting", "patterns": ["hi", "hello", "hey", "howdy", "morning", "evening"] },
+    { "intent": "facebook_marketing", "patterns": ["facebook marketing", "facebook ads", "meta ads", "fb ads", "instagram ads", "social ads", "meta marketing"] },
+    { "intent": "google_marketing", "patterns": ["google marketing", "google ads", "ppc", "search ads", "adwords", "sem", "google advertising"] },
+    { "intent": "website_need", "patterns": ["i need a website", "build website", "create website", "new website", "develop", "site creation", "web development", "react", "nextjs", "wordpress"] },
+    { "intent": "budget_check", "patterns": ["price", "cost", "how much", "rate", "budget", "pricing", "fees", "expensive"] },
+    { "intent": "trust_building", "patterns": ["why choose you", "are you good", "why dxel", "results", "reviews", "portfolio", "experience", "how many projects"] },
+    { "intent": "existing_website", "patterns": ["i already have a website", "improve my website", "audit", "slow website", "fix my site", "redesign"] },
+    { "intent": "marketing_general", "patterns": ["marketing", "ads", "advertising", "traffic", "seo", "growth", "sge"] },
+    { "intent": "close_lead", "patterns": ["i want to start", "let's do it", "hire you", "get started", "proceed", "start project", "book"] },
+    { "intent": "contact", "patterns": ["contact", "talk to human", "speak", "call", "email", "support", "address", "location", "whatsapp"] },
+    { "intent": "microsoft_partner", "patterns": ["microsoft", "partner", "cloud partner", "certification", "ai partner"] },
+    { "intent": "ui_ux_design", "patterns": ["ui", "ux", "design", "wireframe", "prototype", "user experience", "interface"] },
+    { "intent": "mobile_apps", "patterns": ["mobile app", "ios", "android", "swift", "kotlin", "react native", "flutter", "iphone app"] },
+    { "intent": "ecommerce_detail", "patterns": ["ecommerce", "online store", "shopify", "woocommerce", "shopping cart", "sell online"] },
+    { "intent": "seo_sge", "patterns": ["seo", "sge", "search engine", "ranking", "google search", "traffic"] },
+    { "intent": "team_experts", "patterns": ["team", "who works there", "experts", "founder", "ceo", "mehedi", "nadira", "ashiq", "rocky"] },
+    { "intent": "company_story", "patterns": ["story", "about", "history", "mission", "vision", "values", "philosophy"] },
+    { "intent": "legal_info", "patterns": ["privacy", "terms", "agreement", "legal", "policy", "conditions"] },
+    { "intent": "off_topic", "patterns": ["weather", "joke", "sports", "news", "music", "food", "movie", "game", "pizza"] }
+  ],
+  "RESPONSES": {
+    "microsoft_partner": "We are a proud **Microsoft AI Cloud Partner**. This certification allows us to leverage cutting-edge enterprise technology, AI solutions, and cloud infrastructure to give your business a competitive edge.",
+    "ui_ux_design": "Our design team specializes in creating stunning, user-centered digital experiences. We handle everything from user research and wireframing to high-fidelity prototyping and visual design systems.",
+    "mobile_apps": "We build high-performance native and cross-platform mobile apps for iOS and Android using Swift, Kotlin, React Native, and Flutter. Whether it's a startup idea or an enterprise solution, we've got you covered.",
+    "ecommerce_detail": "Scale your revenue with our E-commerce solutions. We specialize in custom stores, Shopify, and WooCommerce, focusing on high conversion rates, seamless payments, and inventory management.",
+    "seo_sge": "Dominate search results with our SEO and Search Generative Experience (SGE) strategies. We don't just get you traffic; we get you high-intent customers who are ready to buy.",
+    "team_experts": "Our team consists of industry veterans like **Md Mehedi Hasan** (Founder), **Nadira Ferdous** (Communications), **Ashiq Ali** (Analyst), and **Md Rocky Biswas** (SEO Strategist). Together, we bring over 11 years of expertise to your project.",
+    "company_story": "DXEL stands for **Digital Experience & Enterprise Leadership**. For over 11 years, we've been on a mission to transform businesses into digital leaders through innovation and strategic growth.",
+    "legal_info": "You can find all our legal documents here: [Privacy Policy](privacy-policy.html), [Terms & Conditions](terms-conditions.html), and [Service Agreement](agreement.html). We value your data security and transparency.",
+    "trust_building": "With over **11 years of experience** and **992+ successful projects**, we have a 98% client retention rate. We are committed to delivering ROI-driven results for every partner."
+  }
+}
