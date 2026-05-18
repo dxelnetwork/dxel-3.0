@@ -1,0 +1,6 @@
+Contact: mailto:hello@dxel.net
+Expires: 2027-12-31T23:59:59Z
+Acknowledgements: https://www.dxel.net/terms-conditions.html
+Canonical: https://www.dxel.net/security.txt
+Policy: https://www.dxel.net/privacy-policy.html
+Preferred-Languages: en
