@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -47,6 +48,58 @@ app.post('/api/leads', (req, res) => {
         syncToGoogleSheets(lead);
         res.status(201).json({ success: true });
     } catch (error) { res.status(500).json({ success: false }); }
+});
+
+// Secure Node.js AI Proxy Endpoint
+app.post('/api/chat', async (req, res) => {
+    const { messages, systemInstruction } = req.body;
+    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+    const MODEL = 'gemini-2.5-flash-lite';
+
+    if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
+        return res.status(500).json({ 
+            success: false, 
+            error: 'Gemini API key is not configured on the server.',
+            message: 'Please set the GEMINI_API_KEY environment variable in your server\'s .env file.'
+        });
+    }
+
+    try {
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+        
+        const geminiPayload = {
+            contents: messages
+        };
+
+        if (systemInstruction) {
+            geminiPayload.systemInstruction = {
+                parts: [{ text: systemInstruction }]
+            };
+        }
+
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(geminiPayload)
+        });
+
+        const result = await response.json();
+
+        if (result.candidates && result.candidates.length > 0) {
+            const aiText = result.candidates[0].content.parts[0].text;
+            res.json({ success: true, response: aiText });
+        } else {
+            console.error('Gemini API Error:', result);
+            res.status(500).json({ 
+                success: false, 
+                error: result.error && result.error.message ? result.error.message : 'No response candidates returned by Gemini API.',
+                details: result
+            });
+        }
+    } catch (error) {
+        console.error('Chat error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
 });
 
 // ADMIN APIs

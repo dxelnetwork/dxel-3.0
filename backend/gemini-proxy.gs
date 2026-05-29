@@ -13,18 +13,23 @@
  * 9. Paste that URL into dxel-ai.js as the LLM_ENDPOINT.
  */
 
-const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY';
-const MODEL = 'gemini-1.5-flash';
+// Retrieve Gemini API Key securely from Script Properties first, fallback to hardcoded value
+let GEMINI_API_KEY = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+if (!GEMINI_API_KEY) {
+  GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY';
+}
+const MODEL = 'gemini-2.5-flash-lite';
 
 function doPost(e) {
-  // Setup CORS headers
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type"
-  };
-
   try {
+    if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
+      return ContentService.createTextOutput(JSON.stringify({ 
+        status: "error", 
+        message: "Gemini API key is not configured in Google Apps Script.", 
+        setupInstructions: "Please open your Apps Script Project Settings -> Script Properties -> Add a property named 'GEMINI_API_KEY' with your actual key from Google AI Studio."
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
     const payload = JSON.parse(e.postData.contents);
     const messages = payload.messages; // Expecting array of {role, parts: [{text}]}
     const systemInstruction = payload.systemInstruction; // Expecting string
@@ -52,18 +57,20 @@ function doPost(e) {
     const response = UrlFetchApp.fetch(apiUrl, options);
     const result = JSON.parse(response.getContentText());
 
-    let aiText = "";
     if (result.candidates && result.candidates.length > 0) {
-      aiText = result.candidates[0].content.parts[0].text;
+      const aiText = result.candidates[0].content.parts[0].text;
+      return ContentService.createTextOutput(JSON.stringify({ 
+        status: "success", 
+        response: aiText 
+      })).setMimeType(ContentService.MimeType.JSON);
     } else {
-      aiText = "I'm experiencing a temporary network issue. Could you please try again?";
       console.error("Gemini Error:", result);
+      return ContentService.createTextOutput(JSON.stringify({ 
+        status: "error", 
+        message: result.error && result.error.message ? result.error.message : "No response candidates returned by Gemini API.",
+        details: result 
+      })).setMimeType(ContentService.MimeType.JSON);
     }
-
-    return ContentService.createTextOutput(JSON.stringify({ 
-      status: "success", 
-      response: aiText 
-    })).setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({ 

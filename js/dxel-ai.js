@@ -5,9 +5,23 @@
   // ---------------------------------------------------------
   // CONFIGURATION
   // ---------------------------------------------------------
-  // Set this to the Web App URL from your Google Apps Script deployment
-  const LLM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXKoz-F0mqOqTu-Tgtxygj58kKTgaLjJfDfPvLqvYN-AjXm60DBV1kG8z0lL5TU52U/exec';
+  // Choose your active AI proxy mode:
+  // - 'GAS': Google Apps Script Web App
+  // - 'NODE': Local or production Node.js Express server
+  const PROXY_MODE = 'GAS';
+
+  // Google Apps Script Deployments
+  const GAS_LLM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGFcxArFUx76TTbsMov5EvBRFjtdMUL1heIrNcgsgc68jlmvEi57gZneECMeUJLEYr/exec';
   const LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycby1wJEExmbIMybJ5n83ZKZcGUzbKcQDz6tds9bG2Rmz3gEbd0nD6oLfLFd3yf85ub5z/exec';
+
+  // Node.js Backend Endpoints
+  const NODE_HOST = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:5000'
+    : window.location.origin;
+  const NODE_LLM_ENDPOINT = `${NODE_HOST}/api/chat`;
+
+  // Get active endpoint based on mode
+  const LLM_ENDPOINT = PROXY_MODE === 'NODE' ? NODE_LLM_ENDPOINT : GAS_LLM_ENDPOINT;
 
   let state = { messages: [] };
 
@@ -45,10 +59,11 @@
     saveState();
 
     try {
-      // Call the Google Apps Script Proxy
+      const isNode = PROXY_MODE === 'NODE';
+      // Call the Active Proxy Endpoint
       const response = await fetch(LLM_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "text/plain" }, // GAS prefers text/plain for postData.contents sometimes or application/json
+        headers: { "Content-Type": isNode ? "application/json" : "text/plain" }, // GAS prefers text/plain
         body: JSON.stringify({
           messages: state.messages,
           systemInstruction: window.DXEL_AI_TRAINING_DATA ? window.DXEL_AI_TRAINING_DATA.SYSTEM_PROMPT : ""
@@ -56,6 +71,25 @@
       });
 
       const result = await response.json();
+
+      // Check if proxy returned an explicit error status or success = false
+      if (result.status === "error" || result.success === false) {
+        console.error("DXEL AI Engine Error Details:", result);
+        state.messages.pop(); // Remove user message if failed
+
+        let errorReason = "";
+        if (result.message) {
+          errorReason = ` (${result.message})`;
+        } else if (result.error) {
+          errorReason = ` (${result.error})`;
+        }
+
+        return {
+          text: `I'm sorry, I'm currently experiencing a connection issue${errorReason}. Please try again later or contact hello@dxel.net.`,
+          quick: []
+        };
+      }
+
       let aiText = result.response || "I'm experiencing a connectivity issue. Please try again.";
 
       // Check for JSON lead extraction block
@@ -131,55 +165,55 @@
     function addMsg(text, type, quickReplies) {
       if (!text) return;
       const div = document.createElement('div'); div.className = `dxel-ai-msg ${type}`;
-    div.innerHTML= `<div class="bubble">${formatText(text)}</div>`;
+      div.innerHTML = `<div class="bubble">${formatText(text)}</div>`;
 
-    if(quickReplies&&quickReplies.length&&type==='bot'){
-      const qr=document.createElement('div'); qr.className='dxel-ai-quick-replies';
-      quickReplies.forEach(label=>{
-        const btn=document.createElement('button'); btn.className='dxel-ai-quick-btn'; btn.textContent=label;
-        btn.addEventListener('click',()=>{handleUserMsg(label);qr.remove();}); qr.appendChild(btn);
-      });
-      div.appendChild(qr);
+      if (quickReplies && quickReplies.length && type === 'bot') {
+        const qr = document.createElement('div'); qr.className = 'dxel-ai-quick-replies';
+        quickReplies.forEach(label => {
+          const btn = document.createElement('button'); btn.className = 'dxel-ai-quick-btn'; btn.textContent = label;
+          btn.addEventListener('click', () => { handleUserMsg(label); qr.remove(); }); qr.appendChild(btn);
+        });
+        div.appendChild(qr);
+      }
+      msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
     }
-    msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
-  }
 
-  function showTyping(){
-    const t=document.createElement('div'); t.className='dxel-ai-typing'; t.id='dxelTyping'; t.innerHTML='<span></span><span></span><span></span>';
-    msgs.appendChild(t); msgs.scrollTop=msgs.scrollHeight; return t;
-  }
+    function showTyping() {
+      const t = document.createElement('div'); t.className = 'dxel-ai-typing'; t.id = 'dxelTyping'; t.innerHTML = '<span></span><span></span><span></span>';
+      msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight; return t;
+    }
 
-  function showWelcome(){
-    if (state.messages.length > 0) {
+    function showWelcome() {
+      if (state.messages.length > 0) {
         // Restore history
         state.messages.forEach(msg => {
-            addMsg(msg.parts[0].text, msg.role === 'user' ? 'user' : 'bot');
+          addMsg(msg.parts[0].text, msg.role === 'user' ? 'user' : 'bot');
         });
         addMsg("Welcome back! How can I help you today?", 'bot');
-    } else {
+      } else {
         addMsg("Hi! 👋 I'm Nyx, the AI for DXEL Network. Are you looking to build a new website, develop an app, or scale your business with digital marketing?", 'bot', ['Build Website', 'Marketing']);
+      }
     }
+
+    async function handleUserMsg(text) {
+      if (!text.trim()) return;
+      addMsg(text, 'user');
+      input.value = '';
+      document.querySelectorAll('.dxel-ai-quick-replies').forEach(el => el.remove());
+
+      const typing = showTyping();
+      const res = await respondWithLLM(text);
+      typing.remove();
+      addMsg(res.text, 'bot', res.quick);
+    }
+
+    trigger.addEventListener('click', toggleChat);
+    closeBtn.addEventListener('click', toggleChat);
+    sendBtn.addEventListener('click', () => handleUserMsg(input.value));
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') handleUserMsg(input.value); });
+    setTimeout(() => { if (!win.classList.contains('open') && badge) badge.style.display = 'block'; }, 15000);
   }
 
-  async function handleUserMsg(text){
-    if(!text.trim())return; 
-    addMsg(text,'user'); 
-    input.value=''; 
-    document.querySelectorAll('.dxel-ai-quick-replies').forEach(el=>el.remove());
-    
-    const typing=showTyping();
-    const res = await respondWithLLM(text);
-    typing.remove();
-    addMsg(res.text, 'bot', res.quick);
-  }
-
-  trigger.addEventListener('click',toggleChat);
-  closeBtn.addEventListener('click',toggleChat);
-  sendBtn.addEventListener('click',()=>handleUserMsg(input.value));
-  input.addEventListener('keydown',e=>{if(e.key==='Enter')handleUserMsg(input.value);});
-  setTimeout(()=>{ if(!win.classList.contains('open')&&badge)badge.style.display='block'; },15000);
-}
-
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
-else init();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
