@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-        content="Payment gateway information for DXEL Network — PayPal, wire transfer, bKash, and bank transfer options.">
+        content="Payment gateway information for DXEL Network — PayPal, Revolut wire transfer, and bank transfer options.">
     <meta name="author" content="DXEL Network">
     <meta property="og:site_name" content="DXEL Network" />
     <meta property="og:title" content="Payment — DXEL Network" />
     <meta property="og:description"
-        content="View our payment gateway options including PayPal, wire transfer, bKash, and bank transfer." />
+        content="View our payment gateway options including PayPal, Revolut wire transfer, and bank transfer." />
     <meta property="og:image" content="images/logo.png" />
     <meta property="og:url" content="https://dxel.net/payment.html" />
     <meta property="og:type" content="article" />
@@ -72,12 +72,18 @@
 
         .payment-card {
             flex: 1;
-            min-width: 300px;
+            min-width: 320px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius-lg);
             padding: var(--space-xl);
-            backdrop-filter: blur(20px)
+            backdrop-filter: blur(20px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .payment-card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
         .payment-card h3 {
@@ -85,20 +91,129 @@
             color: var(--dxel-white);
             margin-bottom: var(--space-lg);
             padding-bottom: var(--space-md);
-            border-bottom: 1px solid var(--glass-border)
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
         }
 
         .payment-card h4 {
             font-size: 1.1rem;
             color: var(--dxel-accent);
-            margin-top: var(--space-lg);
-            margin-bottom: var(--space-md)
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight: 600;
         }
 
         .payment-card img {
-            max-width: 200px;
-            margin-bottom: var(--space-md);
+            max-width: 180px;
+            height: auto;
             border-radius: var(--radius-sm)
+        }
+
+        .currency-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(0, 212, 255, 0.12);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .revolut-banner {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border);
+            padding: 0.85rem 1.1rem;
+            border-radius: var(--radius-md);
+            margin: 1rem 0 1.25rem 0;
+        }
+
+        .revolut-logo-img {
+            height: 32px;
+            width: auto;
+            max-width: 160px;
+            object-fit: contain;
+        }
+
+        .bank-details-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .bank-detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
+        }
+
+        .bank-detail-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .bank-detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--dxel-muted);
+            font-weight: 600;
+        }
+
+        .bank-detail-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .bank-detail-value {
+            color: var(--dxel-white);
+            font-weight: 600;
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        .bank-detail-value.highlight-iban {
+            color: #00d4ff;
+            font-family: 'Space Grotesk', monospace, sans-serif;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-copy {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--dxel-white);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .btn-copy:hover {
+            background: var(--dxel-accent);
+            color: var(--dxel-bg);
+            border-color: var(--dxel-accent);
         }
 
         .payment-card ul {
@@ -189,44 +304,186 @@
 
     <section class="legal-content">
         <div class="container">
-            <p class="last-updated">Last updated January 03, 2025</p>
+            <p class="last-updated">Last updated September 24, 2026</p>
             <h2 class="payment-section-title">Payment Gateway Information</h2>
             <div class="payment-grid">
                 <div class="payment-card">
                     <h3><i class="fas fa-globe" style="margin-right:.5rem;color:var(--dxel-accent)"></i>International
                         Payment Gateway</h3>
-                    <img src="https://psspeech.com/wp-content/uploads/2018/03/paypal-logo-small-min-1.png" alt="PayPal">
-                    <p><strong>PayPal:</strong> dxel@outlook.com</p>
-                    <h4>Wire Transfer</h4>
-                    <img src="https://secure.firstcenturybank.com/images/fi-assets/first-century-bank/first-century-bank-menu-logo-467717ca.png"
-                        alt="First Century Bank">
-                    <ul>
-                        <li><strong>Bank Name:</strong> First Century Bank</li>
-                        <li><strong>Routing (ABA):</strong> 061120084</li>
-                        <li><strong>Beneficiary Name:</strong> DXEL NETWORK</li>
-                        <li><strong>Account Number:</strong> 4012801231343</li>
-                        <li><strong>Account Type:</strong> CHECKING</li>
-                        <li><strong>Bank Address:</strong> 1731 N Elm St, Commerce, GA 30529 USA</li>
-                    </ul>
+
+                    <div
+                        style="margin-bottom: 1.75rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border);">
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <h4 style="margin: 0;">PayPal Payment</h4>
+                            <span class="currency-badge"
+                                style="background: rgba(0, 112, 186, 0.15); color: #00b2ff; border-color: rgba(0, 178, 255, 0.3);">
+                                <i class="fab fa-paypal"></i> Instant Pay
+                            </span>
+                        </div>
+
+                        <div class="revolut-banner"
+                            style="background: rgba(0, 112, 186, 0.08); border-color: rgba(0, 112, 186, 0.25);">
+                            <img src="images/logo/paypal.svg" alt="PayPal" class="revolut-logo-img"
+                                style="height: 28px; width: auto; max-width: 140px;">
+                            <div style="border-left: 1px solid rgba(255, 255, 255, 0.15); padding-left: 0.85rem;">
+                                <strong style="color: var(--dxel-white); font-size: 0.95rem; display: block;">Official
+                                    PayPal Gateway</strong>
+                                <span style="color: var(--dxel-muted); font-size: 0.8rem;">Global Online Payments</span>
+                            </div>
+                        </div>
+
+                        <div class="bank-detail-item">
+                            <span class="bank-detail-label">PayPal Email Address</span>
+                            <div class="bank-detail-row">
+                                <span class="bank-detail-value" style="color: #00d4ff;">dxel@outlook.com</span>
+                                <button class="btn-copy" onclick="copyPaymentText('dxel@outlook.com', this)"
+                                    aria-label="Copy PayPal Email">
+                                    <i class="far fa-copy"></i> Copy Email
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <h4 style="margin: 0;">Wire Transfer</h4>
+                            <span class="currency-badge"><i class="fas fa-euro-sign"></i> Euro (EUR)</span>
+                        </div>
+
+                        <div class="revolut-banner">
+                            <img src="images/logo/revolut.svg" alt="Revolut Bank UAB" class="revolut-logo-img">
+                            <div style="border-left: 1px solid rgba(255, 255, 255, 0.15); padding-left: 0.85rem;">
+                                <strong style="color: var(--dxel-white); font-size: 0.95rem; display: block;">Revolut
+                                    Bank UAB</strong>
+                                <span style="color: var(--dxel-muted); font-size: 0.8rem;">Sucursal em Portugal</span>
+                            </div>
+                        </div>
+
+                        <div class="bank-details-list">
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Beneficiary Name</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">Md Mehedi Hasan</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('Md Mehedi Hasan', this)"
+                                        aria-label="Copy Beneficiary Name">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">IBAN</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value highlight-iban">PT50 3560 0001 9001 5358 3025
+                                        3</span>
+                                    <button class="btn-copy"
+                                        onclick="copyPaymentText('PT50 3560 0001 9001 5358 3025 3', this)"
+                                        aria-label="Copy IBAN">
+                                        <i class="far fa-copy"></i> Copy IBAN
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">BIC / SWIFT Code</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">REVOPTP2</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('REVOPTP2', this)"
+                                        aria-label="Copy BIC / SWIFT Code">
+                                        <i class="far fa-copy"></i> Copy BIC
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Correspondent BIC</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">CHASDEFX</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('CHASDEFX', this)"
+                                        aria-label="Copy Correspondent BIC">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Bank Name &amp; Address</span>
+                                <div class="bank-detail-value"
+                                    style="font-weight: 500; font-size: 0.88rem; line-height: 1.5; margin-top: 0.15rem;">
+                                    <strong style="color: var(--dxel-white);">Revolut Bank UAB - Sucursal em
+                                        Portugal</strong><br>
+                                    Fábrica 390, Rua Heróis de França, nos. 415 and 417, 4450-155, Matosinhos, Portugal
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="payment-card">
                     <h3><i class="fas fa-flag" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Bangladesh
                         Payment Gateway</h3>
-                    <p><strong>bKash Payment Link:</strong></p>
-                    <a href="#"
-                        onclick="window.open('https://shop.bkash.com/dxel-shop01671774548/paymentlink/default-payment','bkashPopup','width=600,height=700,scrollbars=yes,resizable=yes');return false;">
-                        <img src="https://raw.githubusercontent.com/Shipu/bkash-example/master/bkash_payment_logo.png"
-                            alt="bKash">
-                    </a>
-                    <h4>Bank Transfer</h4>
-                    <img src="https://selfservicehub.ebl-bd.com/pic/header_left.png" alt="EBL">
-                    <ul>
-                        <li><strong>Bank Name:</strong> Eastern Bank Plc</li>
-                        <li><strong>Account Name:</strong> DXEL NETWORK</li>
-                        <li><strong>Account Number:</strong> 1951070006108</li>
-                        <li><strong>Branch:</strong> Jessore</li>
-                        <li><strong>Routing Number:</strong> 095410942</li>
-                    </ul>
+
+                    <div>
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <h4 style="margin: 0;">Bank Transfer</h4>
+                            <span class="currency-badge"><i class="fas fa-coins"></i> BDT</span>
+                        </div>
+
+                        <div class="revolut-banner">
+                            <img src="https://selfservicehub.ebl-bd.com/pic/header_left.png" alt="EBL"
+                                style="height: 28px; width: auto; max-width: 150px; filter: brightness(0) invert(1);">
+                            <div style="border-left: 1px solid rgba(255, 255, 255, 0.15); padding-left: 0.85rem;">
+                                <strong style="color: var(--dxel-white); font-size: 0.95rem; display: block;">Eastern
+                                    Bank Plc</strong>
+                                <span style="color: var(--dxel-muted); font-size: 0.8rem;">Jessore Branch</span>
+                            </div>
+                        </div>
+
+                        <div class="bank-details-list">
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Account Name</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">DXEL NETWORK</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('DXEL NETWORK', this)"
+                                        aria-label="Copy Account Name">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Account Number</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value highlight-iban">1951070006108</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('1951070006108', this)"
+                                        aria-label="Copy Account Number">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Branch</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">Jessore</span>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Routing Number</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">095410942</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('095410942', this)"
+                                        aria-label="Copy Routing Number">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <a class="btn-back" href="index.html"><i class="fas fa-arrow-left"></i> BACK</a>
@@ -307,6 +564,44 @@
     <script src="js/main.js"></script>
     <script src="js/dxel-training.js"></script>
     <script src="js/dxel-ai.js"></script>
+    <script>
+        function copyPaymentText(text, btnElement) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(showCopied).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
+
+            function showCopied() {
+                var originalHTML = btnElement.innerHTML;
+                btnElement.innerHTML = '<i class="fas fa-check" style="color:#00ff88;"></i> Copied!';
+                btnElement.style.borderColor = '#00ff88';
+                btnElement.style.color = '#00ff88';
+                setTimeout(function () {
+                    btnElement.innerHTML = originalHTML;
+                    btnElement.style.borderColor = '';
+                    btnElement.style.color = '';
+                }, 2000);
+            }
+
+            function fallbackCopy() {
+                var textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.opacity = "0";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopied();
+                } catch (err) {
+                    console.error('Fallback copy failed', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+    </script>
 </body>
 
 </html>
