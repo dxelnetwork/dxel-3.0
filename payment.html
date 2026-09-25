@@ -26,236 +26,7 @@
     <link rel="icon" href="images/logo/favicon.png">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-803NB2EC0Q"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-803NB2EC0Q');</script>
-    <style>
-        .legal-content {
-            padding: var(--space-3xl) 0
-        }
 
-        .legal-content p {
-            color: var(--dxel-muted);
-            line-height: 1.8;
-            margin-bottom: var(--space-md)
-        }
-
-        .legal-content .last-updated {
-            color: var(--dxel-muted);
-            font-size: .9rem;
-            opacity: .7
-        }
-
-        .legal-content .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: .5rem;
-            padding: .75rem 2rem;
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-full);
-            color: var(--dxel-white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all .3s ease;
-            margin-top: var(--space-xl)
-        }
-
-        .legal-content .btn-back:hover {
-            background: var(--dxel-accent);
-            border-color: var(--dxel-accent);
-            color: var(--dxel-bg)
-        }
-
-        .payment-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-xl);
-            margin-top: var(--space-xl)
-        }
-
-        .payment-card {
-            flex: 1;
-            min-width: 320px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            backdrop-filter: blur(20px);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .payment-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-        }
-
-        .payment-card h3 {
-            font-size: 1.3rem;
-            color: var(--dxel-white);
-            margin-bottom: var(--space-lg);
-            padding-bottom: var(--space-md);
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-        }
-
-        .payment-card h4 {
-            font-size: 1.1rem;
-            color: var(--dxel-accent);
-            margin-top: 0;
-            margin-bottom: 0;
-            font-weight: 600;
-        }
-
-        .payment-card img {
-            max-width: 180px;
-            height: auto;
-            border-radius: var(--radius-sm)
-        }
-
-        .currency-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            background: rgba(0, 212, 255, 0.12);
-            color: #00d4ff;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .revolut-banner {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--glass-border);
-            padding: 0.85rem 1.1rem;
-            border-radius: var(--radius-md);
-            margin: 1rem 0 1.25rem 0;
-        }
-
-        .revolut-logo-img {
-            height: 32px;
-            width: auto;
-            max-width: 160px;
-            object-fit: contain;
-        }
-
-        .bank-details-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .bank-detail-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-md);
-            padding: 0.75rem 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-            transition: all 0.2s ease;
-        }
-
-        .bank-detail-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .bank-detail-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: var(--dxel-muted);
-            font-weight: 600;
-        }
-
-        .bank-detail-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-        }
-
-        .bank-detail-value {
-            color: var(--dxel-white);
-            font-weight: 600;
-            font-size: 0.95rem;
-            word-break: break-word;
-        }
-
-        .bank-detail-value.highlight-iban {
-            color: #00d4ff;
-            font-family: 'Space Grotesk', monospace, sans-serif;
-            font-size: 1.05rem;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-copy {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--dxel-white);
-            border-radius: 6px;
-            padding: 4px 10px;
-            font-size: 0.78rem;
-            font-weight: 500;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            user-select: none;
-        }
-
-        .btn-copy:hover {
-            background: var(--dxel-accent);
-            color: var(--dxel-bg);
-            border-color: var(--dxel-accent);
-        }
-
-        .payment-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0
-        }
-
-        .payment-card ul li {
-            color: var(--dxel-muted);
-            line-height: 2;
-            font-size: .95rem
-        }
-
-        .payment-card ul li strong {
-            color: var(--dxel-white)
-        }
-
-        .payment-card a {
-            color: var(--dxel-accent);
-            text-decoration: none
-        }
-
-        .payment-card a:hover {
-            text-decoration: underline
-        }
-
-        .payment-card p {
-            color: var(--dxel-muted)
-        }
-
-        .payment-card p strong {
-            color: var(--dxel-white)
-        }
-
-        .payment-section-title {
-            font-size: 1.75rem;
-            color: var(--dxel-white);
-            text-align: center;
-            margin-bottom: var(--space-xl)
-        }
-    </style>
 </head>
 
 <body>
@@ -307,12 +78,11 @@
             <p class="last-updated">Last updated September 24, 2026</p>
             <h2 class="payment-section-title">Payment Gateway Information</h2>
             <div class="payment-grid">
+                <!-- Gateway 1: PayPal -->
                 <div class="payment-card">
-                    <h3><i class="fas fa-globe" style="margin-right:.5rem;color:var(--dxel-accent)"></i>International
-                        Payment Gateway</h3>
+                    <h3><i class="fab fa-paypal" style="margin-right:.5rem;color:var(--dxel-accent)"></i>PayPal Payment Gateway</h3>
 
-                    <div
-                        style="margin-bottom: 1.75rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border);">
+                    <div>
                         <div
                             style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
                             <h4 style="margin: 0;">PayPal Payment</h4>
@@ -324,8 +94,7 @@
 
                         <div class="revolut-banner"
                             style="background: rgba(0, 112, 186, 0.08); border-color: rgba(0, 112, 186, 0.25);">
-                            <img src="images/logo/paypal.svg" alt="PayPal" class="revolut-logo-img"
-                                style="height: 28px; width: auto; max-width: 140px;">
+                            <img src="images/logo/paypal.png" alt="PayPal" class="revolut-logo-img">
                             <div style="border-left: 1px solid rgba(255, 255, 255, 0.15); padding-left: 0.85rem;">
                                 <strong style="color: var(--dxel-white); font-size: 0.95rem; display: block;">Official
                                     PayPal Gateway</strong>
@@ -333,17 +102,42 @@
                             </div>
                         </div>
 
-                        <div class="bank-detail-item">
-                            <span class="bank-detail-label">PayPal Email Address</span>
-                            <div class="bank-detail-row">
-                                <span class="bank-detail-value" style="color: #00d4ff;">dxel@outlook.com</span>
-                                <button class="btn-copy" onclick="copyPaymentText('dxel@outlook.com', this)"
-                                    aria-label="Copy PayPal Email">
-                                    <i class="far fa-copy"></i> Copy Email
-                                </button>
+                        <div class="bank-details-list">
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">PayPal Email Address</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value" style="color: #00d4ff;">dxel@outlook.com</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('dxel@outlook.com', this)"
+                                        aria-label="Copy PayPal Email">
+                                        <i class="far fa-copy"></i> Copy Email
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Account Holder</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">DXEL Network</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('DXEL Network', this)"
+                                        aria-label="Copy Account Holder">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Payment Method</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">Instant Online / Global Transfer</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Gateway 2: Revolut Wire Transfer -->
+                <div class="payment-card">
+                    <h3><i class="fas fa-globe" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Revolut Wire Transfer</h3>
 
                     <div>
                         <div
@@ -353,7 +147,7 @@
                         </div>
 
                         <div class="revolut-banner">
-                            <img src="images/logo/revolut.svg" alt="Revolut Bank UAB" class="revolut-logo-img">
+                            <img src="images/logo/revolut.png" alt="Revolut Bank UAB" class="revolut-logo-img">
                             <div style="border-left: 1px solid rgba(255, 255, 255, 0.15); padding-left: 0.85rem;">
                                 <strong style="color: var(--dxel-white); font-size: 0.95rem; display: block;">Revolut
                                     Bank UAB</strong>
@@ -376,8 +170,7 @@
                             <div class="bank-detail-item">
                                 <span class="bank-detail-label">IBAN</span>
                                 <div class="bank-detail-row">
-                                    <span class="bank-detail-value highlight-iban">PT50 3560 0001 9001 5358 3025
-                                        3</span>
+                                    <span class="bank-detail-value highlight-iban">PT50 3560 0001 9001 5358 3025 3</span>
                                     <button class="btn-copy"
                                         onclick="copyPaymentText('PT50 3560 0001 9001 5358 3025 3', this)"
                                         aria-label="Copy IBAN">
@@ -421,9 +214,9 @@
                     </div>
                 </div>
 
+                <!-- Gateway 3: Eastern Bank Plc (Bangladesh) -->
                 <div class="payment-card">
-                    <h3><i class="fas fa-flag" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Bangladesh
-                        Payment Gateway</h3>
+                    <h3><i class="fas fa-university" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Bangladesh Bank Transfer</h3>
 
                     <div>
                         <div
@@ -433,8 +226,7 @@
                         </div>
 
                         <div class="revolut-banner">
-                            <img src="https://selfservicehub.ebl-bd.com/pic/header_left.png" alt="EBL"
-                                style="height: 28px; width: auto; max-width: 150px; filter: brightness(0) invert(1);">
+                            <img src="images/logo/ebl.png" alt="Eastern Bank Plc" class="revolut-logo-img">
                             <div style="border-left: 1px solid rgba(255, 255, 255, 0.15); padding-left: 0.85rem;">
                                 <strong style="color: var(--dxel-white); font-size: 0.95rem; display: block;">Eastern
                                     Bank Plc</strong>
@@ -466,13 +258,6 @@
                             </div>
 
                             <div class="bank-detail-item">
-                                <span class="bank-detail-label">Branch</span>
-                                <div class="bank-detail-row">
-                                    <span class="bank-detail-value">Jessore</span>
-                                </div>
-                            </div>
-
-                            <div class="bank-detail-item">
                                 <span class="bank-detail-label">Routing Number</span>
                                 <div class="bank-detail-row">
                                     <span class="bank-detail-value">095410942</span>
@@ -480,6 +265,13 @@
                                         aria-label="Copy Routing Number">
                                         <i class="far fa-copy"></i> Copy
                                     </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Branch</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">Jessore</span>
                                 </div>
                             </div>
                         </div>
