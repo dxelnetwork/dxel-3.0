@@ -80,7 +80,8 @@
             <div class="payment-grid">
                 <!-- Gateway 1: PayPal -->
                 <div class="payment-card">
-                    <h3><i class="fab fa-paypal" style="margin-right:.5rem;color:var(--dxel-accent)"></i>PayPal Payment Gateway</h3>
+                    <h3><i class="fab fa-paypal" style="margin-right:.5rem;color:var(--dxel-accent)"></i>PayPal Payment
+                        Gateway</h3>
 
                     <div>
                         <div
@@ -137,12 +138,13 @@
 
                 <!-- Gateway 2: Revolut Wire Transfer -->
                 <div class="payment-card">
-                    <h3><i class="fas fa-globe" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Revolut Wire Transfer</h3>
+                    <h3><i class="fas fa-globe" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Revolut Payment
+                        Gateway</h3>
 
                     <div>
                         <div
                             style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
-                            <h4 style="margin: 0;">Wire Transfer</h4>
+                            <h4 style="margin: 0;">Online Payment</h4>
                             <span class="currency-badge"><i class="fas fa-euro-sign"></i> Euro (EUR)</span>
                         </div>
 
@@ -155,68 +157,20 @@
                             </div>
                         </div>
 
-                        <div class="bank-details-list">
-                            <div class="bank-detail-item">
-                                <span class="bank-detail-label">Beneficiary Name</span>
-                                <div class="bank-detail-row">
-                                    <span class="bank-detail-value">Md Mehedi Hasan</span>
-                                    <button class="btn-copy" onclick="copyPaymentText('Md Mehedi Hasan', this)"
-                                        aria-label="Copy Beneficiary Name">
-                                        <i class="far fa-copy"></i> Copy
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="bank-detail-item">
-                                <span class="bank-detail-label">IBAN</span>
-                                <div class="bank-detail-row">
-                                    <span class="bank-detail-value highlight-iban">PT50 3560 0001 9001 5358 3025 3</span>
-                                    <button class="btn-copy"
-                                        onclick="copyPaymentText('PT50 3560 0001 9001 5358 3025 3', this)"
-                                        aria-label="Copy IBAN">
-                                        <i class="far fa-copy"></i> Copy IBAN
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="bank-detail-item">
-                                <span class="bank-detail-label">BIC / SWIFT Code</span>
-                                <div class="bank-detail-row">
-                                    <span class="bank-detail-value">REVOPTP2</span>
-                                    <button class="btn-copy" onclick="copyPaymentText('REVOPTP2', this)"
-                                        aria-label="Copy BIC / SWIFT Code">
-                                        <i class="far fa-copy"></i> Copy BIC
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="bank-detail-item">
-                                <span class="bank-detail-label">Correspondent BIC</span>
-                                <div class="bank-detail-row">
-                                    <span class="bank-detail-value">CHASDEFX</span>
-                                    <button class="btn-copy" onclick="copyPaymentText('CHASDEFX', this)"
-                                        aria-label="Copy Correspondent BIC">
-                                        <i class="far fa-copy"></i> Copy
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="bank-detail-item">
-                                <span class="bank-detail-label">Bank Name &amp; Address</span>
-                                <div class="bank-detail-value"
-                                    style="font-weight: 500; font-size: 0.88rem; line-height: 1.5; margin-top: 0.15rem;">
-                                    <strong style="color: var(--dxel-white);">Revolut Bank UAB - Sucursal em
-                                        Portugal</strong><br>
-                                    Fábrica 390, Rua Heróis de França, nos. 415 and 417, 4450-155, Matosinhos, Portugal
-                                </div>
-                            </div>
+                        <div style="margin: 1.5rem 0; text-align: center;">
+                            <a href="https://checkout.revolut.com/pay/bd16f606-923c-44ec-8dfb-b8d18daea74b"
+                                target="_blank" class="btn btn-primary"
+                                style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: #fff;">
+                                <i class="fas fa-lock"></i> Make Secure Payment
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Gateway 3: Eastern Bank Plc (Bangladesh) -->
                 <div class="payment-card">
-                    <h3><i class="fas fa-university" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Bangladesh Bank Transfer</h3>
+                    <h3><i class="fas fa-university" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Bangladesh
+                        Bank Transfer</h3>
 
                     <div>
                         <div
