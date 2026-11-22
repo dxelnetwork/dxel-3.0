@@ -136,7 +136,80 @@
                     </div>
                 </div>
 
-                <!-- Gateway 2: Revolut Wire Transfer -->
+                <!-- Gateway 2: Millennium BCP -->
+                <div class="payment-card">
+                    <h3><i class="fas fa-university" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Millennium
+                        bcp Transfer</h3>
+
+                    <div>
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <h4 style="margin: 0;">Bank Transfer</h4>
+                            <span class="currency-badge"
+                                style="background: rgba(166, 0, 80, 0.15); color: #ff4d94; border-color: rgba(255, 77, 148, 0.3);">
+                                <i class="fas fa-euro-sign"></i> Euro (EUR)
+                            </span>
+                        </div>
+
+                        <div class="revolut-banner"
+                            style="background: rgba(166, 0, 80, 0.08); border-color: rgba(166, 0, 80, 0.25);">
+                            <img src="images/logo/millennium.svg" alt="Millennium bcp" class="revolut-logo-img">
+                            <div style="border-left: 1px solid rgba(255, 255, 255, 0.15); padding-left: 0.85rem;">
+                                <strong style="color: var(--dxel-white); font-size: 0.95rem; display: block;">Millennium
+                                    bcp</strong>
+                                <span style="color: var(--dxel-muted); font-size: 0.8rem;">Banco Comercial Português</span>
+                            </div>
+                        </div>
+
+                        <div class="bank-details-list">
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Bank Name</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">Millennium Banco Comercial Português</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('Millennium Banco Comercial Português', this)"
+                                        aria-label="Copy Bank Name">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Account Name</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">Md Mehedi Hasan</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('Md Mehedi Hasan', this)"
+                                        aria-label="Copy Account Name">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">IBAN</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value highlight-iban">PT50 0033 0000 4586 5851 9960 5</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('PT50003300004586585199605', this)"
+                                        aria-label="Copy IBAN">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">BIC / SWIFT</span>
+                                <div class="bank-detail-row">
+                                    <span class="bank-detail-value">BCOMPTPL</span>
+                                    <button class="btn-copy" onclick="copyPaymentText('BCOMPTPL', this)"
+                                        aria-label="Copy BIC or SWIFT">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gateway 3: Revolut Wire Transfer -->
                 <div class="payment-card">
                     <h3><i class="fas fa-globe" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Revolut Bank
                         Transfer</h3>
@@ -194,7 +267,7 @@
                     </div>
                 </div>
 
-                <!-- Gateway 3: Eastern Bank Plc (Bangladesh) -->
+                <!-- Gateway 4: Eastern Bank Plc (Bangladesh) -->
                 <div class="payment-card">
                     <h3><i class="fas fa-university" style="margin-right:.5rem;color:var(--dxel-accent)"></i>Bangladesh
                         Bank Transfer</h3>
